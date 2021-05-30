@@ -8,7 +8,7 @@ const server = app.listen("3002", () => {
     console.log(`Servidor rodando na porta ${PORT}`)
 });
 
-io = socket(server);
+const io = socket(server);
 
 io.on("connection", (socket) => {
     console.log(socket.id);
@@ -27,3 +27,4 @@ io.on("connection", (socket) => {
         console.log("USER DISCONNECTED");
     });
 });
+
