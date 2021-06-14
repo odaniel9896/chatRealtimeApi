@@ -5,7 +5,7 @@ const Message = require("./models/Message");
 
 const PORT = process.env.PORT || 3333;
 
-app.listen(PORT, () => {
+const server = app.listen("3002", () => {
     console.log(`Servidor rodando na porta ${PORT}`)
 });
 
