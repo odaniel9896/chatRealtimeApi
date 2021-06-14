@@ -3,9 +3,9 @@ const socket = require("socket.io");
 const Message = require("./models/Message");
 
 
-const PORT = process.env.PORT || 3333;
+const PORT = process.env.PORT || 3002;
 
-const server = app.listen("3002", () => {
+const server = app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`)
 });
 
