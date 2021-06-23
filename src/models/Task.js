@@ -1,12 +1,12 @@
 const { Model, DataTypes } = require("sequelize");
 
-class SprintReview extends Model {
+class Task extends Model {
     static init(sequelize) {
         super.init(
             {
-                sprintId: DataTypes.INTEGER,
-                feedback: DataTypes.TEXT,
-                wasDelivered: DataTypes.TEXT,
+                task: DataTypes.STRING,
+                dueDate: DataTypes.DATE,
+                cardId: DataTypes.INTEGER            
             },
             {
                 sequelize,
@@ -14,8 +14,8 @@ class SprintReview extends Model {
         )
     }
     static associate(models) {
-        this.belongsTo(models.Sprint);
+        this.belongsTo(models.Card);
     }
 }
 
-module.exports = SprintReview;
+module.exports = Task;
