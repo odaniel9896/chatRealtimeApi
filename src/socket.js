@@ -20,7 +20,8 @@ io.on("connection", async (socket) => {
                 chatId: data.chatId,
                 createdAt: data.createdAt,
             });
-            socket.to(data.chatId).emit("receive_message", data);
+            socket.to(data.chatId).emit("receive_message", data.id = message.id);
+            console.log(data)
     });
 
     socket.on("disconnect", () => {
@@ -28,17 +29,19 @@ io.on("connection", async (socket) => {
     });
 
     socket.on("delete_message", async (data) => {
+        console.log(data.chatId)
 
         const message = await Message.findOne({
             where: {
-                id : data.content.id,
-                userId : data.content.userId
+                id : data.id,
+                userId : data.userId
             }
         });
 
         if(!message)
-            return res.status(401).send({ error: "Mensagem não encontrada"})
-        message.destroy();    
+            return ({ error: "Mensagem não encontrada"})
+        message.destroy();
+        socket.to(data.chatId).emit("message_delete", "sua mensagem foi deletada");
     })
 });
 
