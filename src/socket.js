@@ -5,11 +5,9 @@ const server = require("./server");
 const io = socket(server);
 
 io.on("connection", async (socket) => {
-    console.log(socket.id);
 
     socket.on("join_room", (data) => {
         socket.join(data);
-        console.log("User Joined Room: " + data);
     });
 
     socket.on("send_message", async (data) => {
@@ -21,7 +19,6 @@ io.on("connection", async (socket) => {
                 createdAt: data.createdAt,
             });
             socket.to(data.chatId).emit("receive_message", data.id = message.id);
-            console.log(data)
     });
 
     socket.on("disconnect", () => {
@@ -29,8 +26,6 @@ io.on("connection", async (socket) => {
     });
 
     socket.on("delete_message", async (data) => {
-        console.log(data.chatId)
-
         const message = await Message.findOne({
             where: {
                 id : data.id,
